@@ -16,7 +16,9 @@ jobs:
     - name: situation
       run:  pwd && ls
     - name: mkdir_build
-      run:  cd polynomial_regression && mkdir -p build && cd build
+      run:  mkdir -p build
+    - name: cd_build
+      run:  cd build
     - name: cmake
       run: cmake ..
     - name: make
