@@ -13,12 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: situation
+    - name: situation1
       run:  pwd && ls
     - name: mkdir_build
       run:  mkdir -p build
     - name: cd_build
       run:  cd build
+    - name: situation2
+      run:  pwd .. && ls ..
     - name: cmake
       run: cmake ..
     - name: make
