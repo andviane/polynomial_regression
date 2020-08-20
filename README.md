@@ -11,8 +11,8 @@ also some extensions:
 - It is possible to use various STL containers like `std::deque` for interpolation, or iterators. 
   The choice is no longer restricted to `std::vector`.
 - It is possible to supply only Y values (X values are inferred as [ 0 .. Y.size() [ ). This should work well with
-  the the fixed rate sampling.
-- The Polynomial class can also return derivative or integral of itself.
+  the fixed rate sampling.
+- The Polynomial class can also return derivative or integral of itself (another Polynomial).
 
 In comparison to the initial code, there are the following optimizations:
 - This X and Y values are picked only once via sequential iterators. This makes no difference for an array,
@@ -26,7 +26,6 @@ In comparison to the initial code, there are the following optimizations:
 
 While maybe overkill, this library can also do a linear regression for you. It is just a polynomial regression
 of the degree 1.
-
 
 It it a standard CMake project that should be simple to build:
 
