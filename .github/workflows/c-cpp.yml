@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: situation1
-      run:  pwd && ls
+      run: |
+        pwd
+        ls
     - name: mkdir_build
       run:  mkdir -p build
     - name: cd_build
