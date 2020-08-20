@@ -18,14 +18,21 @@ jobs:
         pwd
         ls
     - name: mkdir_build
-      run:  mkdir -p build
-    - name: cd_build
-      run:  cd build
+      run: |
+        mkdir -p build
     - name: cmake
-      run:  ls && cd build && cmake ..
+      run: |
+        cd build 
+        cmake ..
     - name: make
-      run:  ls && cd build && make
+      run: |
+        cd build
+        ls
+        make
     - name: run_tests
-      run:  ls && cd build && ./tests
+      run:  |
+        cd build
+        ./tests
+
 
       
