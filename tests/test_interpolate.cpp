@@ -87,7 +87,7 @@ TEST(Interpolate, n8_float) {
     long double s = 0;
     long double xxx = 1;
     for (int d = 0; d < coeffs.size(); d++) {
-      s = s + xxx *  coeffs[d];
+      s = s + xxx * coeffs[d];
       xxx = xxx * xx;
     }
     y.push_back(s);
@@ -99,5 +99,27 @@ TEST(Interpolate, n8_float) {
     ASSERT_FLOAT_EQ(polynomial(xx), y[xx]);
   }
 }
+
+// Using 128 bit float if such available
+#ifdef  __SIZEOF_FLOAT128__
+TEST(Interpolate, n64_float128) {
+  constexpr int degree = 64;
+
+  std::vector<float> x;
+  std::vector<float> y;
+
+  // Interpolating sin(x)
+  for (float xx = -M_PI; xx < M_PI; xx = xx + 0.001) {
+    x.push_back(xx);
+    y.push_back(std::sin(xx));
+  }
+
+  Polynomial<degree, float, __float128> polynomial = polynomial_regression<degree, float, __float128>(x, y);
+
+  for (int i = 0; i < x.size(); i++) {
+    ASSERT_NEAR(polynomial(x[i]), y[i], 1E-7);
+  }
+}
+#endif
 
 

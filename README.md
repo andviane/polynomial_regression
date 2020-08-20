@@ -6,7 +6,8 @@ also some extensions:
 - The class `Polynomial`, returned by the regression, not just holds coefficients but 
   can also be used as a function for interpolation. Residual can optionally be provided.
 - The data type for internal calculations is defined separately from the type of X and Y. You can
-  use `uint_8_t` for X and Y and still apply a 8th degree polynomial with all fitting done using `long double` instead.
+  use `uint_8_t` for X and Y and still apply a 8th degree polynomial with all fitting done using `long double` instead. 
+  `__float128` may be tried if available. The test suite contains the 64th degree regression over about 6000 values.
 - It is possible to use various STL containers like `std::deque` for interpolation, or iterators. 
   The choice is no longer restricted to `std::vector`.
 - It is possible to supply only Y values (X values are inferred as [ 0 .. Y.size() [ ). This should work well with
@@ -22,6 +23,9 @@ In comparison to the initial code, there are the following optimizations:
   more efficient and cache friendly class that `std::vector`. 
 - If X is not present, the number of the sampled values can also be fixed. This allows to pre-compute and cache
   a large matrix of x'es raised in degrees up till `2*n + 1` that is required for the algorithm.    
+
+While maybe overkill, this library can also do a linear regression for you. It is just a polynomial regression
+of the degree 1.
 
 
 It it a standard CMake project that should be simple to build:

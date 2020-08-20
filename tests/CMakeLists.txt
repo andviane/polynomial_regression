@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(polynomial_regression_tests)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 find_package(GTest)
 
 set(TEST_SRC

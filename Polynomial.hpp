@@ -29,7 +29,7 @@ public:
     }
 
     // If the "official type" happens to be integer or the like, we need a proper rounding.
-    return std::is_integral<TYPE>::value ? (TYPE) std::round(s) : (TYPE) s;
+    return std::is_integral<TYPE>::value ? (TYPE) std::round( (double) s) : (TYPE) s;
   }
 
   Polynomial<p_order - 1, TYPE, PRECISION> differentiate() {
