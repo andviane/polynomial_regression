@@ -1,3 +1,5 @@
+![C/C++ CI](https://github.com/andviane/polynomial_regression/workflows/C/C++%20CI/badge.svg)
+
 This project is derived from 
 [Chris Engelsma gist](https://gist.github.com/chrisengelsma/108f7ab0a746323beaaf7d6634cf4add). It was available under MIT license that stays. The goal of this derived work is to wrap the provided
 algorithm somewhat "more seriously": add unit tests and make it project, not a gist. There are
