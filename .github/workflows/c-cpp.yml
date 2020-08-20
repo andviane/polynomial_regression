@@ -19,12 +19,11 @@ jobs:
       run:  mkdir -p build
     - name: cd_build
       run:  cd build
-    - name: situation2
-      run:  pwd .. && ls ..
     - name: cmake
-      run: cmake ..
+      run:  ls && cd build && cmake ..
     - name: make
-      run: make
+      run:  ls && cd build && make
     - name: run_tests
-      run: ./tests
+      run:  ls && cd build && ./tests
+
       
