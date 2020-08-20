@@ -32,7 +32,12 @@ jobs:
     - name: run_tests
       run:  |
         cd build
-        ./tests
+        if [ -x ./test ]; then
+          ./tests
+        else
+          echo "Tests not built"
+        fi
+
 
 
       
