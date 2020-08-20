@@ -75,9 +75,5 @@ This library is also easy to use:
   std::cout << "f(0.5) = " << simple_fixed(0.5) << std::endl; // 6.0
 ```  
 
-Unlike the original version, our variant takes the polynomial order as a template parameter.
-This allows using more cache and multi-threading friendly std::array rather than 
-std::vector inside the implementation. The second template parameter, if present,
-defines the main data type (float, double, long double, etc). C++17 can infer it
-from parameters.
+
    
