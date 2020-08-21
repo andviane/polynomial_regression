@@ -4,6 +4,8 @@
 
 // Differentiation and integration tests
 
+using namespace andviane;
+
 Polynomial<2> make_polynomial() {
   // y = f(x) = ax^2 + bx + c
   double a = 2;

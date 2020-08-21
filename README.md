@@ -22,7 +22,7 @@ In comparison to the initial code, there are the following optimizations:
 - The function `std::pow` is no longer used. This should allow the usage of custom high precision data types,
   as long as they implement the basic arithmetic operators.   
 - The polynomial degree is made fixed (it is a parameter of template). This allows to use `std::array` that is
-  more efficient and cache friendly class that `std::vector`. 
+  more efficient and cache friendly class than `std::vector`. 
 - If X is not present, the number of the sampled values can also be fixed. This allows to pre-compute and cache
   a large matrix of x'es raised in degrees up till `2*n + 1` that is required for the algorithm.    
 
@@ -46,6 +46,8 @@ Currently it builds a static library, libpolynomial_regression.a.
 This library is also easy to use:
 
 ```
+  using namespace andviane;
+
   // We need data sample first
   // y = f(x) = ax^2 + bx + c
 

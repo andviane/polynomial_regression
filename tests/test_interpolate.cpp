@@ -2,6 +2,8 @@
 
 #include "polynomial_regression.hpp"
 
+using namespace andviane;
+
 // Quadratic double (no need for a type anywhere)
 TEST(Interpolate, n2) {
   // y = f(x) = ax^2 + bx + c

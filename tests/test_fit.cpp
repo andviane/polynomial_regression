@@ -3,6 +3,8 @@
 
 #include "polynomial_regression.hpp"
 
+using namespace andviane;
+
 TEST(Fit, n0) {
   // y = f(x) = c
   float c = 4;

@@ -19,7 +19,7 @@ int main() {
   }
 
   // Compute, differentiate and integrate
-  auto polynomial = polynomial_regression<2>(x, y);  // second degree polynomial
+  auto polynomial = andviane::polynomial_regression<2>(x, y);  // second degree polynomial
 
   std::cout << "Polynomial " << polynomial.DebugString() << std::endl;
   std::cout << "f(0.5) = " << polynomial(0.5) << std::endl // 6.0
@@ -27,12 +27,12 @@ int main() {
             << "S f(0.5) = " << polynomial.integrate()(0.5) << std::endl;
 
   // Do not care about x ? Assume it as 0 .. n
-  auto simple = polynomial_regression<2>(y);
+  auto simple = andviane::polynomial_regression<2>(y);
   std::cout << "Polynomial with auto-x " << simple.DebugString() << std::endl;
   std::cout << "f(0.5) = " << simple(0.5) << std::endl; // 6.0
 
   // Also fixed sample size ? Make a parameter for performance.
-  auto simple_fixed = polynomial_regression_fixed<2, 10>(y); // more is ok, just not less
+  auto simple_fixed = andviane::polynomial_regression_fixed<2, 10>(y); // more is ok, just not less
   std::cout << "Polynomial with auto-x and fixed " << simple_fixed.DebugString() << std::endl;
   std::cout << "f(0.5) = " << simple_fixed(0.5) << std::endl; // 6.0
 
