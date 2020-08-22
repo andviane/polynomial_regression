@@ -10,96 +10,35 @@ namespace andviane {
   template<int p_order, typename TYPE=double, typename PRECISION = TYPE>
   class Polynomial {
   public:
-    Polynomial(int n = 0, bool valid = true) : valid_(valid), data_size_(n) {
-      static_assert(p_order >= 0);
-      coefficients_.fill(0);
-    }
+    Polynomial(int n = 0, bool valid = true);
 
-    Polynomial(std::array<PRECISION, p_order + 1> coefficients, bool valid = true, int n = 0) :
-        valid_(valid), data_size_(n) {
-      static_assert(p_order >= 0);
-      coefficients_ = coefficients;
-    }
+    Polynomial(std::array<PRECISION, p_order + 1> coefficients, bool valid = true, int n = 0);
 
     // Override (), allowing to use polynomial as function that interpolates
-    TYPE operator()(TYPE x) {
-      PRECISION xx = 1;
-      PRECISION s = 0;
-      for (PRECISION a: coefficients_) {
-        s = s + xx * a;
-        xx = xx * x;
-      }
+    TYPE operator()(TYPE x);
 
-      // If the "official type" happens to be integer or the like, we need a proper rounding.
-      return std::is_integral<TYPE>::value ? (TYPE) std::round((double) s) : (TYPE) s;
-    }
+    Polynomial<p_order - 1, TYPE, PRECISION> differentiate();
 
-    Polynomial<p_order - 1, TYPE, PRECISION> differentiate() {
-      static_assert(p_order > 0);
-      Polynomial<p_order - 1, TYPE, PRECISION> diff;
-      for (int n = 1; n <= p_order; n++) {
-        diff[n - 1] = n * coefficients_[n];
-      }
-      return diff;
-    }
-
-    Polynomial<p_order + 1, TYPE, PRECISION> integrate(TYPE C = 0) {
-      Polynomial<p_order + 1, TYPE, PRECISION> integ;
-      for (int n = 1; n <= p_order + 1; n++) {
-        integ[n] = coefficients_[n - 1] / (PRECISION) n;
-      }
-      integ[0] = C;
-      return integ;
-    }
+    Polynomial<p_order + 1, TYPE, PRECISION> integrate(TYPE C = 0);
 
     // Define [] to retrieve the coefficients
-    PRECISION &operator[](int a) {
-      return coefficients_.at(a);
-    }
+    PRECISION &operator[](int a);
 
-    // Define the iterators for easy loop
-    typename std::array<PRECISION, p_order>::iterator begin() {
-      return coefficients_.begin();
-    }
+    // Define the begin() iterator for easy loop over polynomial variables, for (auto c: polynomial) {}
+    typename std::array<PRECISION, p_order>::iterator begin();
 
-    typename std::array<PRECISION, p_order>::iterator end() {
-      return coefficients_.end();
-    }
+    // Define the end() iterator for easy loop over polynomial variables
+    typename std::array<PRECISION, p_order>::iterator end();
 
-    int order() {
-      return p_order;
-    }
+    int order();
 
-    int data_size() {
-      return data_size_;
-    }
+    int data_size();
 
-    PRECISION residual() {
-      return residual_;
-    }
+    PRECISION residual();
 
-    void residual(PRECISION residual) {
-      residual_ = residual;
-    }
+    void residual(PRECISION residual);
 
-    std::string DebugString() {
-      std::string expression;
-      for (int n = p_order; n >= 0; n--) {
-        TYPE k = coefficients_.at(n);
-        switch (n) {
-          case 0:
-            expression = expression + std::to_string(k);
-            break;
-          case 1:
-            expression = expression + std::to_string(k) + " * x + ";
-            break;
-          default:
-            expression = expression + std::to_string(k) + " * x^" + std::to_string(n) + " + ";
-            break;
-        }
-      }
-      return expression;
-    }
+    std::string DebugString();
 
   private:
     std::array<PRECISION, p_order + 1> coefficients_;
@@ -108,5 +47,7 @@ namespace andviane {
     PRECISION residual_ = NAN;
     int data_size_ = 0;
   };
+
+#include "internal/Polynomial.tpp"
 }
 #endif //POLYNOMIAL_POLYNOMIAL_H

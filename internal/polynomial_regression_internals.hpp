@@ -180,7 +180,6 @@ namespace andviane {
       }
       a.residual(r);
     }
-
     return a;
   }
 }
