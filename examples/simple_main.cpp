@@ -26,6 +26,11 @@ int main() {
             << "f'(0.5) = " << polynomial.differentiate()(0.5) << std::endl
             << "S f(0.5) = " << polynomial.integrate()(0.5) << std::endl;
 
+  // Coefficients:
+  for (auto a: polynomial) {
+    std::cout << a << std::endl;
+  }
+
   // Do not care about x ? Assume it as 0 .. n
   auto simple = andviane::polynomial_regression<2>(y);
   std::cout << "Polynomial with auto-x " << simple.DebugString() << std::endl;

@@ -43,7 +43,7 @@ Polynomial<n, TYPE, PRECISION> polynomial_regression(ITERATOR_Y y_iter, bool com
 
 // Perform polynomial regression over two collections that may have different type but expecting the same size
 template<int order, typename TYPE, typename PRECISION,
-    typename COLLECTION_X=std::vector<TYPE>, typename COLLECTION_Y=std::vector<TYPE>>
+    typename COLLECTION_X, typename COLLECTION_Y>
 Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_X &x,
                                                          const COLLECTION_Y &y, bool compute_residual) {
   assert(x.size() == y.size());
@@ -52,7 +52,7 @@ Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_X &x,
 }
 
 // Perform polynomial regression over single collection (x simply changes 0 to N)
-template<int order, typename TYPE, typename PRECISION, typename COLLECTION_Y=std::vector<TYPE>>
+template<int order, typename TYPE, typename PRECISION, typename COLLECTION_Y>
 Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_Y &y, bool compute_residual) {
   assert(y.size() > 0);
   return polynomial_regression<order, TYPE, PRECISION>(y.begin(), y.size(), compute_residual);
@@ -60,7 +60,7 @@ Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_Y &y, 
 
 // Perform polynomial regression over single collection assuming the fixed sample size (x simply changes 0 to N)
 // Assuming fixed size allows to compute the x_raised matrix only once.
-template<int order, int fixed_size, typename TYPE, typename PRECISION, typename COLLECTION_Y=std::vector<TYPE>>
+template<int order, int fixed_size, typename TYPE, typename PRECISION, typename COLLECTION_Y>
 Polynomial<order, TYPE, PRECISION> polynomial_regression_fixed(const COLLECTION_Y &y, bool compute_residual) {
   assert(y.size() <= fixed_size);
   return polynomial_regression<order, fixed_size, TYPE, PRECISION>(y.begin(), compute_residual);
