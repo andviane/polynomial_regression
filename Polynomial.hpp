@@ -30,15 +30,15 @@ namespace andviane {
     // Define the end() iterator for easy loop over polynomial variables
     typename std::array<PRECISION, p_order>::iterator end();
 
-    int order();
+    int order() const;
 
-    int data_size();
+    int data_size() const;
 
-    PRECISION residual();
+    PRECISION residual() const;
 
     void residual(PRECISION residual);
 
-    std::string DebugString();
+    std::string DebugString() const;
 
   private:
     std::array<PRECISION, p_order + 1> coefficients_;

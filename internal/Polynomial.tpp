@@ -63,17 +63,17 @@
     }
 
     template<int p_order, typename TYPE, typename PRECISION>
-    int Polynomial<p_order, TYPE, PRECISION>::order() {
+    int Polynomial<p_order, TYPE, PRECISION>::order() const {
       return p_order;
     }
 
     template<int p_order, typename TYPE, typename PRECISION>
-    int Polynomial<p_order, TYPE, PRECISION>::data_size() {
+    int Polynomial<p_order, TYPE, PRECISION>::data_size() const {
       return data_size_;
     }
 
     template<int p_order, typename TYPE, typename PRECISION>
-    PRECISION Polynomial<p_order, TYPE, PRECISION>::residual() {
+    PRECISION Polynomial<p_order, TYPE, PRECISION>::residual() const {
       return residual_;
     }
 
@@ -83,7 +83,7 @@
     }
 
     template<int p_order, typename TYPE, typename PRECISION>
-    std::string Polynomial<p_order, TYPE, PRECISION>::DebugString() {
+    std::string Polynomial<p_order, TYPE, PRECISION>::DebugString() const {
       std::string expression;
       for (int n = p_order; n >= 0; n--) {
         TYPE k = coefficients_.at(n);
