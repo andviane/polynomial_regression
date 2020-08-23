@@ -98,7 +98,7 @@ namespace andviane {
     }
   }
 
-// Mail algorithm of polynomial regression
+// Main algorithm of polynomial regression
   template<int n, typename TYPE=double, typename PRECISION=TYPE, typename ITERATOR_Y>
   Polynomial <n, TYPE, PRECISION> polynomial_regression(const std::array<std::vector<PRECISION>, 2 * n + 1> &x_raised,
                                                         ITERATOR_Y y_iter,

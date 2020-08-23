@@ -48,14 +48,21 @@ Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_X &x,
                                                          const COLLECTION_Y &y, bool compute_residual) {
   assert(x.size() == y.size());
   assert(x.size() > 0);
-  return polynomial_regression<order, TYPE, PRECISION>(x.begin(), y.begin(), x.size(), compute_residual);
+  return polynomial_regression<order, TYPE, PRECISION>(x.cbegin(), y.cbegin(), x.size(), compute_residual);
+}
+
+template<int order, typename TYPE, typename PRECISION,
+    typename COLLECTION_X, typename COLLECTION_Y>
+Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_X &x,
+                                                         const COLLECTION_Y &y, bool compute_residual, int size) {
+  return polynomial_regression<order, TYPE, PRECISION>(x.cbegin(), y.cbegin(), size, compute_residual);
 }
 
 // Perform polynomial regression over single collection (x simply changes 0 to N)
 template<int order, typename TYPE, typename PRECISION, typename COLLECTION_Y>
 Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_Y &y, bool compute_residual) {
   assert(y.size() > 0);
-  return polynomial_regression<order, TYPE, PRECISION>(y.begin(), y.size(), compute_residual);
+  return polynomial_regression<order, TYPE, PRECISION>(y.cbegin(), y.size(), compute_residual);
 }
 
 // Perform polynomial regression over single collection assuming the fixed sample size (x simply changes 0 to N)
@@ -63,6 +70,6 @@ Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_Y &y, 
 template<int order, int fixed_size, typename TYPE, typename PRECISION, typename COLLECTION_Y>
 Polynomial<order, TYPE, PRECISION> polynomial_regression_fixed(const COLLECTION_Y &y, bool compute_residual) {
   assert(y.size() <= fixed_size);
-  return polynomial_regression<order, fixed_size, TYPE, PRECISION>(y.begin(), compute_residual);
+  return polynomial_regression<order, fixed_size, TYPE, PRECISION>(y.cbegin(), compute_residual);
 }
 
