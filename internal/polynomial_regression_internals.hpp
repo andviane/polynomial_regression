@@ -100,9 +100,9 @@ namespace andviane {
 
 // Main algorithm of polynomial regression
   template<int n, typename TYPE=double, typename PRECISION=TYPE, typename ITERATOR_Y>
-  Polynomial <n, TYPE, PRECISION> polynomial_regression(const std::array<std::vector<PRECISION>, 2 * n + 1> &x_raised,
+  Polynomial <n, TYPE, PRECISION> polynomial_regression_iter(const std::array<std::vector<PRECISION>, 2 * n + 1> &x_raised,
                                                         ITERATOR_Y y_iter,
-                                                        size_t N, bool compute_residual = false) {
+                                                        bool compute_residual, size_t N) {
     constexpr int np1 = n + 1;
     constexpr int np2 = n + 2;
     constexpr int tnp1 = 2 * n + 1;

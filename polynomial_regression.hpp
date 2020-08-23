@@ -54,10 +54,19 @@
 namespace andviane {
 
 // Perform polynomial regression over two collections that may have different type but expecting the same size
+// This function only works with containers that provide the size operator.
   template<int order, typename TYPE=double, typename PRECISION=TYPE,
       typename COLLECTION_X=std::vector<TYPE>, typename COLLECTION_Y=std::vector<TYPE>>
   Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_X &x,
                                                            const COLLECTION_Y &y, bool compute_residual = false);
+
+// Perform polynomial regression using X and Y iterators. This function also works with containers that do not provide
+// the size operator (like std::forward_list)
+  template<int order, typename TYPE=double, typename PRECISION=TYPE,
+      typename COLLECTION_X=std::vector<TYPE>, typename COLLECTION_Y=std::vector<TYPE>>
+  Polynomial<order, TYPE, PRECISION> polynomial_regression(COLLECTION_X &x,
+                                                           COLLECTION_Y &y,
+                                                           bool compute_residual, size_t size);
 
 // Perform polynomial regression over single collection (x simply changes 0 to N)
   template<int order, typename TYPE=double, typename PRECISION=TYPE, typename COLLECTION_Y=std::vector<TYPE>>
@@ -68,28 +77,20 @@ namespace andviane {
   template<int order, int fixed_size, typename TYPE=double, typename PRECISION=TYPE, typename COLLECTION_Y=std::vector<TYPE>>
   Polynomial<order, TYPE, PRECISION> polynomial_regression_fixed(const COLLECTION_Y &y, bool compute_residual = false);
 
-// Perform polynomial regression using X and Y iterators. This function only works with containers that provide
-// the size operator.
+// Perform polynomial regression using X and Y iterators.
   template<int n, typename TYPE=double, typename PRECISION=TYPE, typename ITERATOR_X, typename ITERATOR_Y>
-  Polynomial<n, TYPE, PRECISION> polynomial_regression(ITERATOR_X x_iter,
+  Polynomial<n, TYPE, PRECISION> polynomial_regression_iter(ITERATOR_X x_iter,
                                                        ITERATOR_Y y_iter,
                                                        size_t N, bool compute_residual = false);
 
-// Perform polynomial regression using X and Y iterators. This function also works with containers that do not provide
-// the size operator (like std::forward_list)
-  template<int order, typename TYPE, typename PRECISION,
-      typename COLLECTION_X, typename COLLECTION_Y>
-  Polynomial<order, TYPE, PRECISION> polynomial_regression(const COLLECTION_X &x,
-                                                           const COLLECTION_Y &y, bool compute_residual, int size);
-
   // Perform polynomial regression Y iterator only (X enumerates 0 to N)
   template<int n, typename TYPE=double, typename PRECISION=TYPE, typename ITERATOR_Y>
-  Polynomial<n, TYPE, PRECISION> polynomial_regression(ITERATOR_Y y_iter,
+  Polynomial<n, TYPE, PRECISION> polynomial_regression_iter(ITERATOR_Y y_iter,
                                                        size_t N, bool compute_residual = false);
 
 // Perform polynomial regression using Y iterator only (X enumerates 0 to N assuming the fixed sample size)
   template<int n, int fixed_size, typename TYPE=double, typename PRECISION=TYPE, typename ITERATOR_Y>
-  Polynomial<n, TYPE, PRECISION> polynomial_regression(ITERATOR_Y y_iter, bool compute_residual = false);
+  Polynomial<n, TYPE, PRECISION> polynomial_regression_iter(ITERATOR_Y y_iter, bool compute_residual = false);
 
 #include "internal/polynomial_regression_internals.tpp"
 }

@@ -30,11 +30,19 @@ namespace andviane {
     // Define the end() iterator for easy loop over polynomial variables
     typename std::array<PRECISION, p_order>::iterator end();
 
+    // The order (highest degree) of the polynomial. This is one less than the number of coefficients.
     int order() const;
 
+    // The number of data points that were in the data set.
     int data_size() const;
 
+    // The raw sum of squared differences between data point Y value and predicted value.
+    // Only available if residuals were asked to be calculated.
     PRECISION residual() const;
+
+    // The average of squared differences between data point Y value and predicted value.
+    // Only available if residuals were asked to be calculated.
+    PRECISION avg_sqdif() const;
 
     void residual(PRECISION residual);
 
@@ -50,4 +58,5 @@ namespace andviane {
 
 #include "internal/Polynomial.tpp"
 }
+
 #endif //POLYNOMIAL_POLYNOMIAL_H
